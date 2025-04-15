@@ -60,7 +60,7 @@ Merge Sort is a classic sorting algorithm based on the Divide and Conquer strate
 
 The time complexity of merge sort is $O(nlog(n))$ in all cases. This is because the input array of size n is divided$log(n)$ times (as shown by a division tree of height$log(n)$), and every element must be compared during the merge process, which takes $O(n)$ time. However, since merge sort requires additional arrays during the merging process, its space complexity is $O(n)$, which can be relatively inefficient.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/001.pdf}
 \vspace{-0.3cm}
@@ -76,7 +76,7 @@ Heap Sort is a sorting algorithm that uses the heap data structure, which is bas
 The time complexity for building the heap is $O(n)$, and the sorting process takes $O(nlog(n))$ (as each heapify call takes $O(log(n))$, so the overall time complexity is $O(nlog(n))$ in the best, average, and worst cases. Since no additional memory is used, the space complexity is $O(1)$. Heap sort is known for consistent performance among comparison-based sorting algorithms.
 However, because heapify only compares values and not the original order, the relative order of equal elements can change, making heap sort unstable.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/002.pdf}
 \vspace{-0.3cm}
@@ -103,7 +103,7 @@ Best case (already sorted): $O(n)$, if early termination optimization is applied
 
 Space complexity is $O(1)$ since no extra memory is used. Bubble sort is stable, as it only swaps adjacent elements and maintains the relative order of equal values.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/003.pdf}
 \vspace{-0.3cm}
@@ -129,7 +129,7 @@ Best case (already sorted): $O(n)$
 
 Space complexity is $O(1)$, and it is stable because equal elements retain their relative order when using a "greater than" condition for comparisons.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/004.pdf}
 \vspace{-0.3cm}
@@ -148,7 +148,7 @@ However, it performs only up to n-1 swaps, making it more efficient in terms of 
 
 Selection sort is not stable, because during the swapping process, the relative order of equal elements can change.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/005.pdf}
 \vspace{-0.3cm}
@@ -173,7 +173,7 @@ Quick sort is not stable, since equal elements can change order during partition
 
 Space complexity is $O(n)$ due to recursive calls, though it doesn't use extra arrays like merge sort.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/006.pdf}
 \vspace{-0.3cm}
@@ -185,10 +185,65 @@ Space complexity is $O(n)$ due to recursive calls, though it doesn't use extra a
 This implementation chooses the pivot as the middle element $(pivot = arr[len(arr) // 2])$. While this usually results in good performance, it can lead to poor results on sorted or reversed arrays. Alternative pivot selection methods (randomized, first, or last element) can help avoid the worst-case behavior.
 
 \section{ADVANCED SORTING ALGORITHMS}
-\lipsum[1]
 
 \section{EXPERIMENTAL RESULTS AND ANALYSIS}
-\lipsum[1]
+
+The dataset used in this analysis can be found at the following link: 
+\texttt{https://github.com/Cooa1/Algorithm\_Asssignment1}
+
+\subsection{Merge Sort Result}
+
+In this experiment, the execution time of Merge Sort was measured across various input data types, including sorted (ascending and descending), reverse sorted, random, and partially sorted sequences. According to the results, random data exhibited the longest execution time, taking up to approximately 2.7 seconds. In contrast, completely sorted data (both ascending and descending) showed the shortest execution time, generally under 1.7 seconds. Partially sorted data performed faster than random inputs but slower than fully sorted inputs. This indicates that Merge Sort is largely unaffected by the initial order of the input, as it consistently applies the same divide-and-conquer strategy regardless of input characteristics. However, differences in actual execution time are likely due to factors such as cache performance and memory access patterns. Merge Sort consistently produced correct results for all types of input data, fully satisfying the requirement to evaluate sorting accuracy. Although the execution time graph appeared almost linear as input sizes increased from 1K to 1M, this is expected because the $\log n$ component in the $O(n\log n)$ complexity grows relatively slowly. The experimental data aligns well with the theoretical time complexity of Merge Sort. Overall, Merge Sort demonstrated stable performance and high accuracy across various input distributions, confirming its reliability and effectiveness as a sorting algorithm in practical scenarios.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/mergeTime.pdf}
+\vspace{-0.3cm}
+\caption{Merge Sort Time Graph}  
+\vspace{-0.35cm}
+\label{fig:proportion}
+\end{figure}
+
+In addition to execution time, memory usage was also measured for each type of input. The results show that Merge Sort generally maintains a consistent memory footprint across different input types, with slight variations depending on the input distribution. However, at the largest input size (1 million elements), a noticeable increase in memory usage was observed—particularly for random data, which peaked at over 11 MiB. This spike may be due to temporary buffer allocations or system-level memory management overhead. Sorted and partially sorted inputs showed relatively lower memory usage, typically under 7 MiB. These results align with the expected $O(n)$ space complexity of Merge Sort, which requires additional memory for merging subarrays. While the memory usage fluctuates for smaller input sizes—possibly due to garbage collection or memory reuse patterns—the trend clearly indicates that larger datasets demand proportionally more space. Overall, Merge Sort exhibits predictable and manageable memory usage, reinforcing its reliability for large-scale sorting tasks.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/mergeMem.pdf}
+\vspace{-0.3cm}
+\caption{Merge Sort Memory Graph}  
+\vspace{-0.35cm}
+\label{fig:proportion}
+\end{figure}
+
+\subsection{Heap Sort Result}
+
+HeapSort has a time complexity of $O(n \log n)$, and the execution time increases progressively as the dataset size grows. It processes small datasets quickly, but execution time increases sharply for medium to large datasets, and becomes significantly slow for very large datasets. The execution time is similar across different dataset orders (e.g., \texttt{random}, \texttt{reversed\_sorted}, \texttt{sorted\_asc}, \texttt{sorted\_desc}), and there is no significant time difference between \texttt{sorted\_asc} and \texttt{sorted\_desc}. HeapSort has an additional space complexity of $O(1)$, and its memory usage is lower compared to other comparison-based sorting algorithms. In conclusion, HeapSort maintains a consistent time complexity but can be quite slow for large datasets.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/heapTime.pdf}
+\vspace{-0.3cm}
+\caption{Merge Sort Memory Graph}  
+\vspace{-0.35cm}
+\label{fig:proportion}
+\end{figure}
+
+\subsection{Quick Sort Result}
+QuickSort has an average time complexity of $O(n \log n)$, but in the worst case, it can degrade to $O(n^2)$. The execution time increases progressively as the dataset size grows, with a more noticeable increase for medium to large datasets. The execution time is relatively similar across different dataset orders (e.g., \texttt{random}, \texttt{reversed\_sorted}, \texttt{sorted\_asc}, \texttt{sorted\_desc}), though \texttt{partially\_sorted} datasets tend to take longer due to QuickSort's potential worst-case performance on nearly sorted data. Memory usage for QuickSort is $O(\log n)$ due to the recursive calls, and the memory usage increases as the dataset size grows. However, QuickSort generally has lower memory usage compared to other comparison-based sorting algorithms. Despite the increase in memory usage with larger datasets, QuickSort remains efficient in terms of memory, with the highest usage observed in \texttt{partially\_sorted} datasets, which require more recursion.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/quickTime.pdf}
+\vspace{-0.3cm}
+\caption{Merge Sort Memory Graph}  
+\vspace{-0.35cm}
+\label{fig:proportion}
+\end{figure}
+
+
+
+
 
 
 % \bibliographystyle{ACM-Reference-Format}
